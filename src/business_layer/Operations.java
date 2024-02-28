@@ -3,8 +3,10 @@ package business_layer;
 
 //This class receives the string of the operation and calculates 
 public class Operations {
-	private double result;
-	public Operations(double num1, String op, double num2) {
+	
+	public static double calculate(double num1, String op, double num2) {
+		
+		double result = 0;
 		switch (op) {
 		case "+":
 			result=(num1+num2);
@@ -16,14 +18,15 @@ public class Operations {
 			result=(num1*num2);
 			break;
 		case "/":
-			result=(num1/num2);
+			if (num2 != 0) {
+				result = num1/num2;
+			} else {
+				throw new ArithmeticException("Division by zero");
+			}
 			break;
 		default:
-			System.out.println("Send a allowed op");
-			break;
+			throw new IllegalArgumentException("Invalid operation");
 		}
-	}
-	public double getResult() {
 		return result;
 	}
 	

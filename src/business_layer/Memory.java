@@ -1,30 +1,34 @@
 package business_layer;
-import java.util.ArrayList;
-
 
 public class Memory {
-	private ArrayList<String> numbers;
+	private StringBuilder numberBuilder;
+	private String operation;
 	
 	public Memory() {
-		numbers = new ArrayList<String>();
+		numberBuilder = new StringBuilder();
+		operation = "";
 	}
 	//This is design for concatenate each number clicked and returning the full number
 	public String getNumbers() {
-		String fullNumber = "";
-		
-		for (String num : numbers) {
-			fullNumber+= num;
-		}
-		
-		return fullNumber;
-		
+		return numberBuilder.toString();
+	}
+
+	public String getOperation() {
+		return operation;
 	}
 	
-	public void setNumber(String number) {
-		numbers.add(number);
+	public void appendNumber(String number) {
+		if (!numberBuilder.toString().contains(".") || !number.equals(".")) {
+			numberBuilder.append(number);
+		}
+	}
+
+	public void setOperation(String op) {
+		operation = op;
 	}
 	
 	public void resetArray() {
-		numbers.clear();
+		numberBuilder.setLength(0);
+		operation = "";
 	}
 }
